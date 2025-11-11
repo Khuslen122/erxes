@@ -18,7 +18,13 @@ export const CoverDelete = ({
   const { removePos } = useRemovePos();
   const { toast } = useToast();
 
-  const coverCount = coverIds.includes(',') ? coverIds.split(',').length : 1;
+  const coverCount =
+    (coverIds
+      ? coverIds
+          .split(',')
+          .map((s) => s.trim())
+          .filter(Boolean).length
+      : 0) || 0;
 
   return (
     <Button
@@ -41,7 +47,9 @@ export const CoverDelete = ({
             onCompleted: () => {
               toast({
                 title: 'Success',
-                description: `${coverCount} covers deleted successfully.`,
+                description: `${coverCount} cover${
+                  coverCount > 1 ? 's' : ''
+                } deleted successfully.`,
               });
 
               if (onDeleteSuccess) {

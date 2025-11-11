@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/client';
-import queries from '~/modules/pos/pos-order-by-subsription/graphql/queries';
+import queries from '@/pos/pos-order-by-subsription/graphql/queries';
 
 const POS_PER_PAGE = 30;
 
-export const usePosOrderBySubsriptionList = (
+export const usePosOrderBySubscriptionList = (
   options: { posId?: string } = {},
 ) => {
   const { posId, ...otherOptions } = options;
@@ -37,8 +37,8 @@ export const usePosOrderBySubsriptionList = (
 
     fetchMore({
       variables: {
+        ...variables,
         page: Math.ceil(transformedPosList.length / POS_PER_PAGE) + 1,
-        perPage: POS_PER_PAGE,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
@@ -56,7 +56,7 @@ export const usePosOrderBySubsriptionList = (
 
   return {
     loading,
-    posOrderBySubsriptionList: transformedPosList,
+    posOrderBySubscriptionList: transformedPosList,
     totalCount: data?.PosOrderBySubscriptionsTotalCount || 0,
     handleFetchMore,
     pageInfo: {

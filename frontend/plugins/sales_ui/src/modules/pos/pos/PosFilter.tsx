@@ -14,10 +14,9 @@ import {
   useMultiQueryState,
 } from 'erxes-ui';
 import { SelectMember, TagsFilter, SelectBrand } from 'ui-modules';
-
-import { PosTotalCount } from './PosTotalCount';
-import { useIsPosLeadSessionKey } from '../pos-detail/hooks/UsePosLeadSessionKey';
-import { PosHotKeyScope } from '../types/posHotKeyScope';
+import { PosHotKeyScope } from '@/pos/types/posHotKeyScope';
+import { useIsPosLeadSessionKey } from '@/pos/pos-detail/hooks/UsePosLeadSessionKey';
+import { TotalCountDisplay } from '@/pos/pos/PosTotalCount';
 const PosFilterPopover = () => {
   const [queries] = useMultiQueryState<{
     tags: string[];
@@ -26,7 +25,16 @@ const PosFilterPopover = () => {
     updated: string;
     lastSeen: string;
     brand: string;
-  }>(['tags', 'searchValue', 'created', 'updated', 'lastSeen', 'brand']);
+    birthday: string;
+  }>([
+    'tags',
+    'searchValue',
+    'created',
+    'updated',
+    'lastSeen',
+    'brand',
+    'birthday',
+  ]);
 
   const hasFilters = Object.values(queries || {}).some(
     (value) => value !== null,
@@ -161,7 +169,7 @@ export const PosFilter = () => {
         <SelectMember.FilterBar />
         <SelectBrand.FilterBar />
         <PosFilterPopover />
-        <PosTotalCount />
+        <TotalCountDisplay />
       </Filter.Bar>
     </Filter>
   );

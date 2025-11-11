@@ -7,9 +7,9 @@ import {
   useMultiQueryState,
 } from 'erxes-ui';
 import { SelectMember, TagsFilter, SelectBrand } from 'ui-modules';
-import { useIsPosCoverLeadSessionKey } from '../hooks/UsePosCoverLeadSessionKey';
-import { PosCoverHotKeyScope } from '../types/posHotkeyScope';
-import { PosCoverItemTotalCount } from './PosCoverItemTotalCount';
+import { useIsPosCoverLeadSessionKey } from '@/pos/pos-covers/hooks/UsePosCoverLeadSessionKey';
+import { PosCoverHotKeyScope } from '@/pos/pos-covers/types/posHotkeyScope';
+import { PosCoverItemTotalCount } from '@/pos/pos-covers/components/PosCoverItemTotalCount';
 
 const PosFilterPopover = () => {
   const [queries] = useMultiQueryState<{
@@ -36,12 +36,13 @@ const PosFilterPopover = () => {
               />
               <Command.List className="p-1">
                 <Filter.Item value="searchValue" inDialog>
-                  POS
+                  <IconSearch />
+                  Search
                 </Filter.Item>
                 <TagsFilter />
                 <Filter.Item value="brand">
                   <IconLabel />
-                  users
+                  Brand
                 </Filter.Item>
                 <SelectMember.FilterItem />
               </Command.List>
